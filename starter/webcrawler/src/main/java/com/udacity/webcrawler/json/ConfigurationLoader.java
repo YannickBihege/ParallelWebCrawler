@@ -25,6 +25,9 @@ public final class ConfigurationLoader {
    */
   public CrawlerConfiguration load() {
     // TODO: Fill in this method.
+    // Ask yourself waht does the method return and initialize it if necessary.
+    //  07.04 Yannick Bihege This is not sufficiently clearly defined. This means reading a file from a path.
+    Reader reader = Files.new
 
     return new CrawlerConfiguration.Builder().build();
   }
