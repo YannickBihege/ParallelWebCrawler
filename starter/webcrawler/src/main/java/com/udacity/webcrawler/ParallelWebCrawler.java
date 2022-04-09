@@ -134,7 +134,6 @@ final class ParallelWebCrawler implements WebCrawler {
             invokeAll(subtasks);
             return true;
         }
-
     }
 
     @Override
