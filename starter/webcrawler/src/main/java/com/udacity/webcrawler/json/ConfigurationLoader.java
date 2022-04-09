@@ -22,7 +22,11 @@ public final class ConfigurationLoader {
    * Loads configuration from this {@link ConfigurationLoader}'s path
    *
    * @return the loaded {@link CrawlerConfiguration}.
+   *  Your load() method will read the JSON string from a file Path which has already been provided to the
+   *    * ConfigurationLoader constructor. Pass that string to the read(Reader reader) and return the created
+   *    * CrawlerConfiguration. Remember to close the file when you are done!
    */
+
   public CrawlerConfiguration load()  throws IOException {
     // XXX : Fill in this method.
     // Ask yourself waht does the method return and initialize it if necessary.
@@ -47,15 +51,17 @@ public final class ConfigurationLoader {
    * Y.Bihege
    * The reader parameter contains JSON input. Your read(Reader reader) method should read the JSON
    * input and parse it into a CrawlerConfiguration using the Jackson JSON library.
+   *
+   * implement CrawlerConfiguration#read(Reader) by creating a new
+   * com.fasterxml.jackson.databind.ObjectMapper and calling ObjectMapper#readValue.
    */
   public static CrawlerConfiguration read(Reader reader) throws IOException  {
     // This is here to get rid of the unused variable warning.
     Objects.requireNonNull(reader);
     // XXX: Fill in this method
-    // This method use is to read a json file
     ObjectMapper objectMapper = new ObjectMapper();
     // The first parameter is the reader
-    objectMapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
+    //objectMapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
     return objectMapper.readValue(reader , CrawlerConfiguration.Builder.class).build();
 
     //return new CrawlerConfiguration.Builder().build();
