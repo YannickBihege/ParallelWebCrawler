@@ -8,6 +8,10 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+// YB
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 /**
  * A data class that represents the configuration of a single web crawl.
  * Y.Bihege
@@ -153,7 +157,7 @@ public final class CrawlerConfiguration {
    * Path to the output file where performance data from this web crawl should be written.
    *
    * <p>If a file already exists at the path, performance information should be appended to the
-   * existing file.
+   * existing file
    *
    * <p>If the path is empty, the data will be written to standard output.
    */
