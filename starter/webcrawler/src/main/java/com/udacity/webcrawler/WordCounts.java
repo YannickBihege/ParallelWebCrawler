@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 /**
  * Utility class that sorts the map of word counts.
  *
- * <p>TODO: Reimplement the sort() method using only the Stream API and lambdas and/or method
+ * XXX 09.04 Reimplement the sort() method using only the Stream API and lambdas and/or method
  *          references.
  */
 final class WordCounts {
@@ -18,17 +18,16 @@ final class WordCounts {
    * to the provided {@link WordCountComparator}, and includes only the top
    * {@param popluarWordCount} words and counts.
    *
-   * <p>TODO: Reimplement this method using only the Stream API and lambdas and/or method
+   * <p>XXX 09.04: Reimplement this method using only the Stream API and lambdas and/or method
    *          references.
    *
    * @param wordCounts       the unsorted map of word counts.
    * @param popularWordCount the number of popular words to include in the result map.
    * @return a map containing the top {@param popularWordCount} words and counts in the right order.
    */
+
+  /*
   static Map<String, Integer> sort(Map<String, Integer> wordCounts, int popularWordCount) {
-
-    // TODO: Reimplement this method using only the Stream API and lambdas and/or method references.
-
     PriorityQueue<Map.Entry<String, Integer>> sortedCounts =
         new PriorityQueue<>(wordCounts.size(), new WordCountComparator());
     sortedCounts.addAll(wordCounts.entrySet());
@@ -38,6 +37,23 @@ final class WordCounts {
       topCounts.put(entry.getKey(), entry.getValue());
     }
     return topCounts;
+  } */
+
+  static Map<String, Integer> sort(Map<String, Integer> wordCounts, int popularWordCount) {
+
+    // XXX: Reimplement this method using only the Stream API and lambdas and/or method references.
+    WordCountComparator comparator = new WordCountComparator();
+    return  wordCounts
+            .entrySet()
+            .stream()
+            .filter(Objects::nonNUll)
+            .sorted(comparator)
+            .limit(Math.min(popularWordCount, wordCounts.size()))
+            .collect(
+                    Collectors
+                            .toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> a, LinkedHashMap::new)
+                   );
+
   }
 
   /**
