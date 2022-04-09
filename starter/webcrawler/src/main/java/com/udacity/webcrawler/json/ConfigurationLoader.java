@@ -23,13 +23,19 @@ public final class ConfigurationLoader {
    *
    * @return the loaded {@link CrawlerConfiguration}.
    */
-  public CrawlerConfiguration load() {
-    // TODO: Fill in this method.
+  public CrawlerConfiguration load()  throws IOException {
+    // XXX : Fill in this method.
     // Ask yourself waht does the method return and initialize it if necessary.
     //  07.04 Yannick Bihege This is not sufficiently clearly defined. This means reading a file from a path.
-    Reader reader = Files.new
 
-    return new CrawlerConfiguration.Builder().build();
+    try (Reader reader = Files.newBufferedReader(path)) {
+      return read(reader);
+    } catch (Exception e) {
+      e.getLocalizedMessage();
+      return null;
+    }
+    // This I find confusing
+    // return new CrawlerConfiguration.Builder().build();
   }
 
   /**
@@ -37,12 +43,21 @@ public final class ConfigurationLoader {
    *
    * @param reader a Reader pointing to a JSON string that contains crawler configuration.
    * @return a crawler configuration
+   *
+   * Y.Bihege
+   * The reader parameter contains JSON input. Your read(Reader reader) method should read the JSON
+   * input and parse it into a CrawlerConfiguration using the Jackson JSON library.
    */
-  public static CrawlerConfiguration read(Reader reader) {
+  public static CrawlerConfiguration read(Reader reader) throws IOException  {
     // This is here to get rid of the unused variable warning.
     Objects.requireNonNull(reader);
-    // TODO: Fill in this method
+    // XXX: Fill in this method
+    // This method use is to read a json file
+    ObjectMapper objectMapper = new ObjectMapper();
+    // The first parameter is the reader
+    objectMapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
+    return objectMapper.readValue(reader , CrawlerConfiguration.Builder.class).build();
 
-    return new CrawlerConfiguration.Builder().build();
+    //return new CrawlerConfiguration.Builder().build();
   }
 }

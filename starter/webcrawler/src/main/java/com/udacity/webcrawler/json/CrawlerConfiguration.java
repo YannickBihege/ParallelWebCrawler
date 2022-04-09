@@ -10,7 +10,11 @@ import java.util.stream.Collectors;
 
 /**
  * A data class that represents the configuration of a single web crawl.
+ * Y.Bihege
+ * First, "tell" Jackson that CrawlerConfiguration uses the builder pattern by annotating the
+ * CrawlerConfiguration class with the @JsonDeserialize annotation:
  */
+@JsonDeserialize(builder = CrawlerConfiguration.Builder.class)
 public final class CrawlerConfiguration {
 
   private final List<String> startPages;
