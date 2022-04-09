@@ -4,6 +4,12 @@ import java.io.Writer;
 import java.nio.file.Path;
 import java.util.Objects;
 
+// 09.04
+import java.util.Objects;
+import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.nio.file.Files;
+import com.fasterxml.jackson.core.JsonGenerator;
 /**
  * Utility class to write a {@link CrawlResult} to file.
  */
@@ -28,17 +34,35 @@ public final class CrawlResultWriter {
   public void write(Path path) {
     // This is here to get rid of the unused variable warning.
     Objects.requireNonNull(path);
-    // TODO: Fill in this method.
+    // XXX 09.04: Fill in this method.
+    try (Writer writer = Files.newBufferedWriter(path)) {
+      write(writer);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
   }
 
   /**
    * Formats the {@link CrawlResult} as JSON and writes it to the given {@link Writer}.
    *
    * @param writer the destination where the crawl result data should be written.
+   * Hint: If a test fails due to a Stream being closed twice, try calling ObjectMapper#disable(Feature)
+   * with the com.fasterxml.jackson.core.JsonGenerator.Feature.AUTO_CLOSE_TARGET feature. This will
+   * prevent Jackson from closing the Writer in CrawlResultWriter#write(Writer), since you should have
+   * already closed it in CrawlResultWriter#write(Path)
    */
   public void write(Writer writer) {
     // This is here to get rid of the unused variable warning.
     Objects.requireNonNull(writer);
-    // TODO: Fill in this method.
+    // XXX 09.04: Fill in this method.
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
+    // mapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
+
+    try {
+      mapper.writeValue(writer, result);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 }

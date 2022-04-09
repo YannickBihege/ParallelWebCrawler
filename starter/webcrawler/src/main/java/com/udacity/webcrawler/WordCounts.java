@@ -5,6 +5,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+// 09.04
+import java.util.stream.*;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 /**
  * Utility class that sorts the map of word counts.
  *
@@ -46,7 +51,7 @@ final class WordCounts {
     return  wordCounts
             .entrySet()
             .stream()
-            .filter(Objects::nonNUll)
+            .filter(Objects::nonNull)
             .sorted(comparator)
             .limit(Math.min(popularWordCount, wordCounts.size()))
             .collect(
