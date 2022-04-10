@@ -38,6 +38,7 @@ The parallel crawler should run faster on any computer with more than one availa
 Q3. Analyze your method profiler through the lens of Aspect Oriented Programming, by answering the following questions:
 
     (a) What cross-cutting concern is being addressed by the com.udacity.webcrawler.profiler.Profiler class?
+Performance topics are addressed.
 
 The code addressing the cross-cutting concern must be scattered, or duplicated, across the various related locations, resulting in a loss of modularity.
 
@@ -53,12 +54,25 @@ Q4. Identify three (3) different design patterns used in this project, and expla
 Proxy
 gives Can improve the API for object creation when the class being instantiated has a lot pf parameters.
 add a layer of security to the original underlying
+- ProfilerImpl
+What I like is that we can use a proxy as a layer to protect classes and objects.
+What I dislike : it can increase the amount of code and the complexity when it is not necessary.
 
 Builder
 Can improve the API for object creation when the class being instantiated has a lot pf parameters.
+The configuration CrawlerConfiguration is based on the builder pattern.
+What I dislike
+* The builder pattern makes the code less likely to be understood at first glance even if it increased the readability of the code.
+What I like
+It can help to reduce the number of parameters or the size of the method signature.
 
 Dependency injection
 Object creation. The framework does the work for object creation,
+- webcrawler main
+What I dislike
+I do not like dependency injection because it hides the complexity and the logic hidden behind an annotation.
+What I like
+It certainly increase the readability.
 
 
 ##
