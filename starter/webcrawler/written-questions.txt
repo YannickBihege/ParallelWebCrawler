@@ -32,7 +32,8 @@ An old hardware will need more resources and therefore more time in order to def
     (b) Suggest one scenario in which the parallel web crawler will almost certainly perform better than the sequential
         crawler. Why will it perform better?
 If we increase the maximal depth of the search. The parallel version should outperform the sequential one.
-
+The parallel crawler is slower due to the extra overhead from creating the thread pools and workers.
+The parallel crawler should run faster on any computer with more than one available processor (or CPU core).
 
 Q3. Analyze your method profiler through the lens of Aspect Oriented Programming, by answering the following questions:
 
@@ -58,3 +59,9 @@ Can improve the API for object creation when the class being instantiated has a 
 
 Dependency injection
 Object creation. The framework does the work for object creation,
+
+
+##
+Run at Sun, 10 Apr 2022 19:38:22 GMT
+com.udacity.webcrawler.ParallelWebCrawler#crawl took 0m 1s 390ms
+com.udacity.webcrawler.parser.PageParserImpl#parse took 0m 2s 971ms
