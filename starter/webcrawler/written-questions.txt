@@ -14,6 +14,9 @@ Q1. Run the web crawler using the configurations located at src/main/config/writ
 
     Why did the parser take more time when run with ParallelWebCrawler?
 
+    The parallel crawler visited more pages and works less effectively on a one thread computer. The sequential code on the other hand
+    performs well on a single thread computer.
+
 $ java -classpath target/udacity-webcrawler-1.0.jar     com.udacity.webcrawler.main.WebCrawlerMain     src/main/config/written_question_1a.json
 {"wordCounts":{"data":273,"learning":152,"udacity":149,"with":127,"program":121},"urlsVisited":9}yann@ubuntu:~/Documents/Javaprog_nd/ParallelWebCrawler/starter/webcrawler$
 
